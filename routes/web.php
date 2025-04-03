@@ -7,15 +7,34 @@ use App\Models\Post;
 
 // No agrego método porque la clase solo tiene un método
 // y lo llamo __invoke
+
+
+
 Route::get('/', [HomeController::class, 'home']);
 
-Route::get('/posts', [PostController::class, 'index']);
+/*
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 
 // Poner esto por encima del de abajo para que entre aquí y no ahí primero
-Route::get('/posts/create', [PostController::class, 'create']);
+Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 
-Route::get('/posts/{post}', [PostController::class, 'show']);
+Route::post('/posts',[PostController::class, 'store'])->name('posts.store');
 
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+
+Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
+
+Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
+
+Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+*/
+
+Route::resource('posts', PostController::class);
+/* con ApiResource se hacen las rutas necesarias para poner usar una API */
+/* ->except('destroy') | ->except(['destroy', 'algo']) - para exceptuar las q no queires */
+/* se puede cambiar el nombre de las rutas por el nombre que quieras y luego poner*/
+/* ->names('posts') para definir los posts.strore y eso */
+/* y ->parameters(['articulos' => 'post']) para que las variables de la url se sigan llamando $post */
 
 /*
 Route::get('/posts/{post}/{category?}', function ($post, $category = null) {
