@@ -15,13 +15,16 @@ return new class extends Migration
             $table->id();
 
             $table->string('title');
+
+            $table->string('slug')->unique();
+
             $table->longText('content');
 
             $table->string('category')->nullable();
 
             $table->timestamp('published_at')->nullable();
 
-            $table->boolean('is_active')->default(true);
+            $table->boolean('is_active')->default(false);
 
             $table->timestamps();
         });

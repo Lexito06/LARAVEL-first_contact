@@ -10,6 +10,19 @@ class Post extends Model
 {
     use HasFactory;
 
+    /*
+    protected $fillable = [
+        'title',
+        'slug',
+        'content',
+        'category',
+    ];
+    */
+
+    protected $guarded = [
+        'is_active',
+    ];
+
     protected function casts(): array
     {
         return [
@@ -35,6 +48,14 @@ class Post extends Model
                 return ucfirst($valor);
             }
         );
+    }
+
+    public function getRouteKeyName()
+    {
+        // Cambia el nombre de la variable que se pasa por la url
+        // por defecto es id, pero se puede cambiar por el nombre de la columna que quieras
+        // en este caso se cambia por el título
+        return 'slug';
     }
 
 }
