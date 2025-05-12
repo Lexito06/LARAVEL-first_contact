@@ -1,0 +1,325 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #050a1c;
+    background: linear-gradient(145deg, #050a1c, #0c1638, #0a183d);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Estrellas cayendo */
+.stars-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    animation: fall linear infinite;
+    opacity: 0.5;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-100vh) translateX(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    95% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(100vh) translateX(20px);
+        opacity: 0;
+    }
+}
+
+/* Constelaciones de fondo */
+.constellation {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: rgba(136, 177, 255, 0.8);
+    border-radius: 50%;
+    box-shadow: 0 0 10px 1px rgba(136, 177, 255, 0.5);
+}
+
+.login-container {
+    position: relative;
+    z-index: 1;
+    width: 380px;
+    background: rgba(8, 19, 48, 0.75);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5),
+        0 0 25px rgba(79, 124, 247, 0.2);
+    border: 1px solid rgba(79, 124, 247, 0.2);
+    padding: 40px;
+    transform: translateY(20px);
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.login-container h2 {
+    color: #e6eeff;
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 30px;
+    letter-spacing: 1.5px;
+    font-weight: 400;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.login-container h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 2px;
+    background: #4f7cf7;
+}
+
+.login-form .input-group {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.login-form .input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    background: rgba(13, 23, 54, 0.6);
+    border: 1px solid rgba(79, 124, 247, 0.3);
+    border-radius: 6px;
+    color: #e6eeff;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    transition: all 0.3s;
+    outline: none;
+}
+
+.login-form .input-group input:focus {
+    border-color: rgba(79, 124, 247, 0.6);
+    box-shadow: 0 0 0 2px rgba(79, 124, 247, 0.2);
+}
+
+.login-form .input-group label {
+    position: absolute;
+    top: 12px;
+    left: 15px;
+    color: #89a4ff;
+    font-size: 15px;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+.login-form .input-group input:valid~label,
+.login-form .input-group input:focus~label {
+    top: -20px;
+    left: 5px;
+    font-size: 12px;
+    color: #a7baff;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 12px 0;
+    background: #3b5ef7;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 2px 8px rgba(59, 94, 247, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.login-form button:hover {
+    background: #2a4df5;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(59, 94, 247, 0.4);
+}
+
+.login-form button:active {
+    transform: translateY(0);
+}
+
+.login-form button::after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.2);
+    height: 100%;
+    width: 60px;
+    top: 0;
+    left: -80px;
+    transform: skewX(-20deg);
+    transition: 0.4s;
+}
+
+.login-form button:hover::after {
+    left: 105%;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 25px 0;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(79, 124, 247, 0.3);
+}
+
+.divider span {
+    padding: 0 15px;
+    color: #89a4ff;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 25px;
+    color: #89a4ff;
+    font-size: 13px;
+}
+
+.register-link a {
+    color: #b8c6ff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+    border-bottom: 1px solid transparent;
+}
+
+.register-link a:hover {
+    border-bottom-color: #b8c6ff;
+}
+
+/* Efecto resplandor */
+.glow {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(79, 124, 247, 0.2) 0%, rgba(79, 124, 247, 0) 70%);
+    pointer-events: none;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        width: 90%;
+        padding: 30px 20px;
+    }
+}
+
+/* Botones de selección de tipo de cuenta */
+.account-type {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.account-type button {
+    flex: 1;
+    margin: 0 5px;
+    background: #e9ecef;
+    color: #333;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.account-type button.active {
+    background: #007bff;
+    color: white;
+}
+
+/* Estilo para la flecha de vuelta */
+.back-arrow {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    /* Asegura que esté sobre otros elementos */
+}
+
+.back-link {
+    text-decoration: none;
+    color: #fff;
+    /* Color del texto */
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /* Espacio entre el ícono y el texto */
+    transition: color 0.3s ease;
+    /* Efecto suave al pasar el cursor */
+}
+
+.back-link:hover {
+    color: #89a4ff;
+    /* Cambia el color al pasar el cursor */
+}

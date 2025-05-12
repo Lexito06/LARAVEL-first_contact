@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Rol;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,6 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         // Aquí se llama a todos los seeders que se hayan creado
         $this->call([
+            RolSeeder::class,
             UserSeeder::class,
             PostSeeder::class,
         ]);

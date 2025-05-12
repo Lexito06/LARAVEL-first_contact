@@ -16,9 +16,19 @@ class UserSeeder extends Seeder
         // Este será un seeder para crear registros en la tabla users
         $user = new User();
 
-        $user->name = 'Dalian Stetcu';
-        $user->email = 'dalianstetcu@gmail.com';
+        $user->name = 'Dalian Administrador';
+        $user->email = 'dalianadmin@gmail.com';
         $user->password = bcrypt('12345678');
+        $user->id_rol = 1; // 1 = Administrador
+
+        $user->save();
+
+        $user = new User();
+
+        $user->name = 'Dalian Desarrolador';
+        $user->email = 'daliandes@gmail.com';
+        $user->password = bcrypt('12345678');
+        $user->id_rol = 2; // 2 = Desarrollador
 
         $user->save();
 

@@ -29,6 +29,12 @@ Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.upda
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 */
 
+Route::get('/posts/login', [PostController::class, 'login'])->name('posts.login');
+
+Route::get('/posts/register', [PostController::class, 'register'])->name('posts.register');
+
+Route::get('/posts/logged', [PostController::class, 'logged'])->name('posts.index.logged');
+
 Route::resource('posts', PostController::class);
 /* con ApiResource se hacen las rutas necesarias para poner usar una API */
 /* ->except('destroy') | ->except(['destroy', 'algo']) - para exceptuar las q no queires */

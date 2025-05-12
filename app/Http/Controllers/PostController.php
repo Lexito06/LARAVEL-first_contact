@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
+use App\Mail\PostCreatedMail;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class PostController extends Controller
 {
@@ -21,6 +23,16 @@ class PostController extends Controller
         return view('posts.create');
     }
 
+    public function login()
+    {
+        return view('posts.login');
+    }
+
+    public function register()
+    {
+        return view('posts.register');
+    }
+
     public function store(StorePostRequest $request)
     {
         /*
@@ -32,7 +44,7 @@ class PostController extends Controller
         ]);
         */
 
-        Post::create($request->all());
+        $post = Post::create($request->all());
 
         /*
         $post = new Post;
@@ -44,6 +56,8 @@ class PostController extends Controller
 
         $post->save();
         */
+
+        Mail::to('prueba@prueba.com')->send(new PostCreatedMail($post));
 
         return redirect()->route('posts.index');
     }
