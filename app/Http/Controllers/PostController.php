@@ -7,30 +7,30 @@ use App\Mail\PostCreatedMail;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
     public function index()
     {
+        if (Auth::check()) {
+            return redirect()->route('logged'); // Redirige a la página de posts para usuarios autenticados
+        }
         // Con el paginate se hace la paginación y aparecen 15 registros (por defecto)
         $posts = Post::orderby('id', 'desc')->paginate(10);
 
         return view('posts.index', compact('posts'));
     }
 
+    public function logged()
+    {
+        $posts = Post::orderby('id', 'desc')->paginate(10);
+        return view('posts.logged', compact('posts'));
+    }
+
     public function create()
     {
         return view('posts.create');
-    }
-
-    public function login()
-    {
-        return view('posts.login');
-    }
-
-    public function register()
-    {
-        return view('posts.register');
     }
 
     public function store(StorePostRequest $request)

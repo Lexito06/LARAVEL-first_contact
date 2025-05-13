@@ -128,94 +128,6 @@ function createConstellation() {
     document.body.appendChild(constellation);
 }
 
-// Efecto para el botón de login
-const loginBtn = document.getElementById('loginBtn');
-loginBtn.addEventListener('click', function (e) {
-    e.preventDefault();
-
-    // Efecto de onda al hacer click
-    const circle = document.createElement('div');
-    const d = Math.max(this.clientWidth, this.clientHeight);
-
-    circle.style.width = circle.style.height = `${d}px`;
-    circle.style.position = 'absolute';
-    circle.style.borderRadius = '50%';
-    circle.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
-    circle.style.left = `${e.clientX - this.offsetLeft - d / 2}px`;
-    circle.style.top = `${e.clientY - this.offsetTop - d / 2}px`;
-    circle.style.transform = 'scale(0)';
-    circle.style.animation = 'ripple 0.6s linear';
-
-    this.appendChild(circle);
-
-    setTimeout(() => {
-        circle.remove();
-        // Simulación de login
-        simulateLogin();
-    }, 600);
-});
-
-// Simulación del proceso de login
-function simulateLogin() {
-    const form = document.querySelector('.login-form');
-    const container = document.querySelector('.login-container');
-
-    // Efecto de spinner de carga
-    loginBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i>';
-    loginBtn.disabled = true;
-
-    setTimeout(() => {
-        // Animación de salida
-        container.style.animation = 'fadeOut 0.5s forwards';
-
-        setTimeout(() => {
-            // Redirección exitosa
-            const overlay = document.createElement('div');
-            overlay.style.position = 'fixed';
-            overlay.style.top = '0';
-            overlay.style.left = '0';
-            overlay.style.width = '100%';
-            overlay.style.height = '100%';
-            overlay.style.backgroundColor = 'rgba(5, 10, 28, 0.85)';
-            overlay.style.display = 'flex';
-            overlay.style.justifyContent = 'center';
-            overlay.style.alignItems = 'center';
-            overlay.style.zIndex = '999';
-            overlay.style.opacity = '0';
-            overlay.style.transition = 'opacity 0.5s';
-
-            const message = document.createElement('div');
-            message.innerHTML = '<i class="fas fa-check-circle" style="color:#4f7cf7; font-size:40px; margin-bottom:15px;"></i><br>Acceso exitoso';
-            message.style.color = '#e6eeff';
-            message.style.fontSize = '18px';
-            message.style.textAlign = 'center';
-            message.style.padding = '30px 40px';
-            message.style.borderRadius = '8px';
-            message.style.backgroundColor = 'rgba(8, 19, 48, 0.95)';
-            message.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(79, 124, 247, 0.3)';
-            message.style.border = '1px solid rgba(79, 124, 247, 0.2)';
-
-            overlay.appendChild(message);
-            document.body.appendChild(overlay);
-
-            setTimeout(() => {
-                overlay.style.opacity = '1';
-            }, 100);
-
-            // Restablecer después de un tiempo
-            setTimeout(() => {
-                overlay.style.opacity = '0';
-                setTimeout(() => {
-                    overlay.remove();
-                    container.style.animation = 'fadeIn 1s forwards';
-                    form.reset();
-                    loginBtn.innerHTML = 'Ingresar';
-                    loginBtn.disabled = false;
-                }, 500);
-            }, 2000);
-        }, 500);
-    }, 1500);
-}
 
 // Añadir keyframes
 const style = document.createElement('style');
@@ -252,5 +164,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const accountType = button.getAttribute('data-type');
             console.log(`Tipo de cuenta seleccionada: ${accountType}`);
         });
+    });
+});
+
+// Asignar rol al usuario que se registra
+
+document.querySelectorAll('.account-btn').forEach(button => {
+    button.addEventListener('click', function () {
+        document.querySelectorAll('.account-btn').forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        document.getElementById('idRolInput').value = this.dataset.type === 'developer' ? 2 : 3;
     });
 });

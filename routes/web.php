@@ -3,7 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\LoginController;
 use App\Models\Post;
+use Illuminate\Auth\Events\Login;
 
 // No agrego método porque la clase solo tiene un método
 // y lo llamo __invoke
@@ -29,13 +32,24 @@ Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.upda
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 */
 
-Route::get('/posts/login', [PostController::class, 'login'])->name('posts.login');
+// Login y tal
+Route::view('/login', 'login')->name('login');
 
-Route::get('/posts/register', [PostController::class, 'register'])->name('posts.register');
+Route::view('/register', 'register')->name('register');
 
-Route::get('/posts/logged', [PostController::class, 'logged'])->name('posts.index.logged');
+Route::get('/posts/logged', [PostController::class, 'logged'])->middleware('auth')->name('logged');
 
+Route::post('/validar-registro', [LoginController::class, 'register'])->name('validar-registro');
+Route::post('/inicia-sesion', [LoginController::class, 'login'])->name('inicia-sesion');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+// Perfil
+Route::get('/perfil', [PerfilController::class, 'show'])->name('perfil')->middleware('auth');
+Route::put('/perfil/editar/{post}', [PerfilController::class, 'actualizar'])->middleware('auth')->name('perfil-update');
+
+// Rutas de los posts
 Route::resource('posts', PostController::class);
+
 /* con ApiResource se hacen las rutas necesarias para poner usar una API */
 /* ->except('destroy') | ->except(['destroy', 'algo']) - para exceptuar las q no queires */
 /* se puede cambiar el nombre de las rutas por el nombre que quieras y luego poner*/

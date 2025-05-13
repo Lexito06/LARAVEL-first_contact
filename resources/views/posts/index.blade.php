@@ -28,10 +28,10 @@
                 </nav>
                 <div class="user-actions">
 
-                    <a href="{{ route('posts.login') }}">
+                    <a href="{{ route('login') }}">
                         <button class="login-btn">Iniciar Sesión</button>
                     </a>
-                    <a href="{{ route('posts.register') }}">
+                    <a href="{{ route('register') }}">
                         <button class="register-btn">Registrarse</button>
                     </a>
                 </div>
@@ -162,3 +162,4 @@
         </body>
 
 </x-app-layout>
+

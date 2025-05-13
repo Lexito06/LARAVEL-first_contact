@@ -1,0 +1,94 @@
+/* Estilos generales */
+:root {
+    --primary-color: #0a1128;
+    --secondary-color: #1282a2;
+    --accent-color: #034078;
+    --text-color: #fefcfb;
+    --background-color: #010326;
+    --card-bg: rgba(3, 64, 120, 0.8);
+    --hover-color: #18a1ff;
+  }
+
+body {
+    background-color: var(--background-color);
+    background-image:
+      radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
+      radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
+      radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
+    background-size: 550px 550px, 350px 350px, 250px 250px;
+    background-position: 0 0, 40px 60px, 130px 270px;
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+.perfil-container {
+    background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 100px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin: 10px 0;
+}
+
+.perfil-info {
+    margin-bottom: 20px;
+}
+
+.perfil-info p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.perfil-info p i {
+    color: #007bff;
+}
+
+h2 {
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    background-color: #f9f9f9;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+a {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: var(--text-color);
+    background-color: #007bff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+a:hover {
+    background-color: #0056b3;
+}

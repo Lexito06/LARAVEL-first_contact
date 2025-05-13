@@ -24,24 +24,25 @@
     <div class="login-container">
 
         <h2>Iniciar Sesión</h2>
-        <form class="login-form">
+        <form class="login-form" action="{{ route('inicia-sesion') }}" method="POST">
+            @csrf
             <div class="input-group">
-                <input type="text" required>
+                <input type="text" id="emailInput" name="email" required>
                 <label>Correo electrónico</label>
             </div>
             <div class="input-group">
-                <input type="password" required>
+                <input type="password" id="passwordInput" name="password" required>
                 <label>Contraseña</label>
             </div>
 
-            <button type="button" id="loginBtn">Ingresar</button>
+            <button type="submit" id="loginBtn">Ingresar</button>
 
             <div class="divider">
                 <span>O</span>
             </div>
 
             <div class="register-link">
-                ¿No tienes una cuenta? <a href="{{ route('posts.register') }}">Crear cuenta</a>
+                ¿No tienes una cuenta? <a href="{{ route('register') }}">Crear cuenta</a>
             </div>
         </form>
     </div>

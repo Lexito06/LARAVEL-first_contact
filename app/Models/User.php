@@ -46,4 +46,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function rol()
+    {
+        return $this->belongsTo(Rol::class, 'id_rol'); // Asegúrate de que 'id_rol' sea la clave foránea
+    }
+
 }
