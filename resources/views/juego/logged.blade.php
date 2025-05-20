@@ -15,7 +15,7 @@
     <header class="header">
         <div class="container">
             <div class="logo">
-                <a href="{{ asset('posts') }}">
+                <a href="{{ asset('juego') }}">
                     <img src="{{ asset('img/logoblanco.png') }}" alt="Logo de la web">
                 </a>
             </div>
@@ -29,9 +29,9 @@
             </nav>
             <div class="user-actions">
                 <!-- Botón de biblioteca -->
-                <button class="library-btn">
+                <a href="{{ route('biblioteca') }}" class="library-btn">
                     <i class="fas fa-book-open"></i> Mi Biblioteca
-                </button>
+                </a>
 
                 <!-- Menú de usuario -->
                 <div class="user-menu">
@@ -42,10 +42,6 @@
                         <div class="user-dropdown-item">
                             <i class="fas fa-user-circle"></i>
                             <a href="{{ asset('perfil') }}">Mi Perfil</a>
-                        </div>
-                        <div class="user-dropdown-item">
-                            <i class="fas fa-cog"></i>
-                            <a href="#">Ajustes</a>
                         </div>
                         <div class="user-dropdown-item">
                             <i class="fas fa-wallet"></i>
@@ -165,15 +161,15 @@
                 <a href="#" class="view-all">Ver todo <i class="fas fa-chevron-right"></i></a>
             </div>
             <div class="game-grid">
-                @foreach ($posts as $post)
+                @foreach ($juegos as $juego)
                     <div class="game-card">
-                        <a href="{{ route('posts.show', $post /*->id*/) }}">
+                        <a href="{{ route('juego.show', $juego /*->id*/) }}">
                             <img src="/api/placeholder/400/320" alt="Imagen del juego">
                             <div class="game-info">
-                                <div class="game-title">{{ $post->title }}</div>
+                                <div class="game-title">{{ $juego->nombre }}</div>
                                 <div class="game-meta">
                                     <span><i class="fas fa-star"></i> 4.8</span>
-                                    <span>59.99€</span>
+                                    <span>{{ $juego->precio }}</span>
                                 </div>
                             </div>
                         </a>

@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             RolSeeder::class,
             UserSeeder::class,
             PostSeeder::class,
+            CategoriaSeeder::class,
+            JuegoSeeder::class,
         ]);
 
     }

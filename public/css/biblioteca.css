@@ -1,0 +1,349 @@
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0a0d14;
+            color: #e6e9f0;
+            overflow-x: hidden;
+        }
+
+        .stars-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background-color: #ffffff;
+            border-radius: 50%;
+            animation: twinkle 4s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.2;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        .header {
+            background: linear-gradient(to right, #10182b, #1a2a4d);
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 128, 255, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #2a7fff, #00b3ff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 600;
+            background: linear-gradient(to right, #3d9bff, #8fd6ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .search-container {
+            flex: 0 1 500px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 20px 10px 40px;
+            background: rgba(26, 42, 77, 0.7);
+            border: 1px solid #3a67b2;
+            border-radius: 20px;
+            color: #e6e9f0;
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            background: rgba(26, 42, 77, 0.9);
+            border-color: #4b81d5;
+            box-shadow: 0 0 8px rgba(75, 129, 213, 0.5);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7e9be8;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-link {
+            color: #a8baec;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+            padding: 5px 0;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: #ffffff;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, #3d9bff, #00b3ff);
+            transition: width 0.2s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4b81d5, #00b3ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            border: 2px solid #1a2a4d;
+            cursor: pointer;
+        }
+
+        .main-container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 24px auto;
+            padding: 0 16px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin: 32px 0 16px;
+            color: #ffffff;
+            position: relative;
+            padding-left: 16px;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #3d9bff, #00b3ff);
+            border-radius: 2px;
+        }
+
+        .games-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        .game-card {
+            background: linear-gradient(145deg, #121c30, #1d2942);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 128, 255, 0.25);
+        }
+
+        .game-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 60%, rgba(13, 20, 40, 0.8));
+            pointer-events: none;
+        }
+
+        .game-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .game-info {
+            padding: 16px;
+            position: relative;
+        }
+
+        .game-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .game-developer {
+            font-size: 14px;
+            color: #7e9be8;
+            margin-bottom: 12px;
+        }
+
+        .game-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .game-stats {
+            display: flex;
+            gap: 12px;
+            font-size: 13px;
+            color: #a8baec;
+        }
+
+        .game-stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .game-progress {
+            height: 3px;
+            width: 100%;
+            background-color: #192440;
+            border-radius: 2px;
+            margin-top: 12px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #3d9bff, #00b3ff);
+            border-radius: 2px;
+        }
+
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .category {
+            padding: 6px 16px;
+            background: rgba(26, 42, 77, 0.7);
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #3a67b2;
+        }
+
+        .category:hover,
+        .category.active {
+            background: linear-gradient(to right, #2a7fff, #00b3ff);
+            color: #ffffff;
+            border-color: transparent;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 32px;
+            gap: 16px;
+        }
+
+        .stat-card {
+            flex: 1;
+            background: linear-gradient(145deg, #121c30, #1d2942);
+            border-radius: 10px;
+            padding: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(to right, #3d9bff, #00b3ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 8px 0;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #7e9be8;
+        }
+
+        .footer {
+            margin-top: 64px;
+            padding: 24px 0;
+            background: linear-gradient(to right, #10182b, #1a2a4d);
+            text-align: center;
+            color: #7e9be8;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: #a8baec;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer a:hover {
+            color: #ffffff;
+        }

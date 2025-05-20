@@ -1,7 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -9,11 +9,18 @@ use Illuminate\Support\Facades\Auth;
 class PerfilController extends Controller
 {
 
-    public function show()
+    public function show(User $user)
     {
-        $user = Auth::user(); // Obtén el usuario autenticado
-
         return view('perfil', compact('user')); // Pasa el usuario a la vista
+    }
+
+    public function edit(User $user)
+    {
+
+        // $post = Post::find($post);
+        $user = Auth::user();
+
+        return view('perfil-edit', compact('user'));
     }
 
     public function update(Request $request, User $user)
@@ -25,10 +32,14 @@ class PerfilController extends Controller
             'password' => 'nullable|string|min:8|confirmed',
         ]);
 
-        $user->update($request->all());
+        $data = $request->only('name', 'email');
 
-        // Redirige con un mensaje de éxito
-        return redirect()->route('perfil')->with('success', 'Perfil actualizado correctamente.');
+        if ($request->filled('password')) {
+            $data['password'] = bcrypt($request->password);
+        }
+
+        $user->update($data);
+
+        return redirect()->route('perfil', ['user' => $user->id]);
     }
-
 }

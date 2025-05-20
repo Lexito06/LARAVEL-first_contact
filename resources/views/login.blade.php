@@ -12,7 +12,7 @@
 
 <body>
     <div class="back-arrow">
-        <a href="{{ route('posts.index') }}" class="back-link">
+        <a href="{{ route('juego.index') }}" class="back-link">
             <i class="fas fa-arrow-left"></i> Volver al Inicio
         </a>
     </div>

@@ -2,39 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePostRequest;
-use App\Mail\PostCreatedMail;
+use App\Http\Requests\StoreJuegoRequest;
 use App\Models\Juego;
-use App\Models\Post;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 
-class PostController extends Controller
+class JuegoController extends Controller
 {
     public function index()
     {
+
         if (Auth::check()) {
             return redirect()->route('logged'); // Redirige a la página de posts para usuarios autenticados
         }
-        // Con el paginate se hace la paginación y aparecen 15 registros (por defecto)
-        $juego = Juego::orderby('id', 'desc')->paginate(10);
 
-        return view('posts.index', compact('juego'));
+        // Con el paginate se hace la paginación y aparecen 15 registros (por defecto)
+        $juegos = Juego::orderby('id', 'desc')->paginate(10);
+
+        return view('juego.index', compact('juegos'));
     }
 
     public function logged()
     {
-        $juego = Juego::orderby('id', 'desc')->paginate(10);
-        return view('posts.logged', compact('juego'));
+        $juegos = Juego::orderby('id', 'desc')->paginate(10);
+        return view('juego.logged', compact('juegos'));
     }
 
     public function create()
     {
-        return view('posts.create');
+        return view('juego.create');
     }
 
-    public function store(StorePostRequest $request)
+    public function store(StoreJuegoRequest $request)
     {
         /*
         $request->validate([
@@ -45,7 +44,7 @@ class PostController extends Controller
         ]);
         */
 
-        $post = Post::create($request->all());
+        //$juego = Juego::create($request->all());
 
         /*
         $post = new Post;
@@ -57,37 +56,43 @@ class PostController extends Controller
 
         $post->save();
         */
+        $juego = new Juego();
+        $juego->nombre = $request->nombre;
+        $juego->descripcion = $request->descripcion;
+        $juego->precio = $request->precio;
+        $juego->id_categoria = $request->id_categoria;
+        $juego->save();
 
-        return redirect()->route('posts.index');
+        return redirect()->route('juego.index');
     }
 
-    public function show(Post $post)
+    public function show(Juego $juego)
     {
 
         // $post = Post::find($post);
 
-        return view('posts.show', compact('post'));
+        return view('juego.show', compact('juego'));
     }
 
-    public function edit(Post $post)
+    public function edit(Juego $juego)
     {
 
         // $post = Post::find($post);
 
-        return view('posts.edit', compact('post'));
+        return view('juego.edit', compact('juego'));
     }
 
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Juego $juego)
     {
 
         $request->validate([
-            'title' => 'required|min:5|max:255',
-            'slug' => "required|unique:posts,slug,{$post->id}",
-            'content' => 'required',
-            'category' => 'required',
+            'nombre' => 'required|min:5|max:255',
+            'descripcion' => 'required',
+            'precio' => 'required',
+            'id_categoria' => 'required|exists:categorias,id',
         ]);
 
-        $post->update($request->all());
+        $juego->update($request->all());
         // $post = Post::find($post);
 
         /*
@@ -99,14 +104,14 @@ class PostController extends Controller
         $post->save();
         */
 
-        return redirect()->route('posts.show', $post);
+        return redirect()->route('juego.show', $juego);
     }
 
-    public function destroy(Post $post)
+    public function destroy(Juego $juego)
     {
         // $post = Post::find($post);
-        $post->delete();
+        $juego->delete();
 
-        return redirect()->route('posts.index');
+        return redirect()->route('juego.tienda');
     }
 }

@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Carrusel de imágenes
     let currentSlide = 0;
     const slides = document.querySelectorAll('.carousel-item');
