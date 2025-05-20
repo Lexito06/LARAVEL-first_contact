@@ -19,15 +19,20 @@
                     <img src="{{ asset('img/logoblanco.png') }}" alt="Logo de la web">
                 </a>
             </div>
-            <nav class="nav">
-                <ul class="nav-list">
-                    <li><a href="#">Tienda</a></li>
-                    <li><a href="#">Descubrir</a></li>
-                    <li><a href="#">Comunidad</a></li>
-                    <li><a href="#">Soporte</a></li>
-                </ul>
-            </nav>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Buscar juegos...">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </div>
+
             <div class="user-actions">
+                <a href="{{ route('tienda') }}" class="library-btn">
+                    <i class="fas fa-bag-shopping"></i>Tienda
+                </a>
                 <!-- Botón de biblioteca -->
                 <a href="{{ route('biblioteca') }}" class="library-btn">
                     <i class="fas fa-book-open"></i> Mi Biblioteca

@@ -59,6 +59,10 @@ Route::put('/perfil/{user}', [PerfilController::class, 'update'])->middleware('a
 // Biblioteca
 Route::get('/juego/biblioteca', [BibliotecaController::class, 'biblioteca'])->name('biblioteca')->middleware('auth');
 
+// Tienda
+Route::get('/juego/tienda', [JuegoController::class, 'tienda'])->name('tienda');
+Route::get('/juego/tiendalogged', [JuegoController::class, 'tiendalogged'])->name('tiendalogged')->middleware('auth');
+
 // Rutas de los posts
 Route::resource('posts', PostController::class);
 

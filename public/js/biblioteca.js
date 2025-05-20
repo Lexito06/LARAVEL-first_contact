@@ -33,3 +33,29 @@ function createStars() {
 
 // Ejecutar cuando se cargue la página
 window.addEventListener('load', createStars);
+
+// Filtrar por categoría
+document.addEventListener('DOMContentLoaded', function() {
+    const categoryButtons = document.querySelectorAll('.category');
+    const gameCards = document.querySelectorAll('.game-card');
+
+    categoryButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Quitar 'active' de todos los botones
+            categoryButtons.forEach(b => b.classList.remove('active'));
+            // Poner 'active' en el botón pulsado
+            this.classList.add('active');
+
+            const categoria = this.textContent.trim().toLowerCase();
+
+            gameCards.forEach(card => {
+                const cardCategoria = card.getAttribute('data-categoria');
+                if (categoria === 'todos' || cardCategoria === categoria) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+});

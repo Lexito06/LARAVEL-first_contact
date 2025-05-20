@@ -70,12 +70,22 @@
         <!-- Juegos Recomendados -->
         <section class="recommended-games">
             <div class="container">
-                <h2 class="section-title">Juegos Recomendados</h2>
+                <div class="library-header">
+                    <h2 class="section-title">Juegos Recomendados</h2>
+                    <a href="#" class="view-all">Ver todo <i class="fas fa-chevron-right"></i></a>
+                </div>
                 <div class="game-grid">
                     @foreach ($juegos as $juego)
                         <div class="game-card">
                             <a href="{{ route('juego.show', $juego /*->id*/) }}">
-                                {{ $juego->nombre }}
+                                <img src="/api/placeholder/400/320" alt="Imagen del juego">
+                                <div class="game-info">
+                                    <div class="game-title">{{ $juego->nombre }}</div>
+                                    <div class="game-meta">
+                                        <span><i class="fas fa-star"></i> 4.8</span>
+                                        <span>{{ $juego->precio }}</span>
+                                    </div>
+                                </div>
                             </a>
                         </div>
                     @endforeach
@@ -95,9 +105,11 @@
                     </ul>
                 </div>
                 <div class="footer-social">
-                    <a href="#"><img src="" alt="Facebook"></a>
-                    <a href="#"><img src="" alt="Twitter"></a>
-                    <a href="#"><img src="" alt="Instagram"></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
                 </div>
                 <div class="footer-copyright">
                     <p>&copy; 2025 Mi Página Web. Todos los derechos reservados.</p>
@@ -162,4 +174,3 @@
         </body>
 
 </x-app-layout>
-

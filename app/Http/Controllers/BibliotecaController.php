@@ -11,6 +11,6 @@ class BibliotecaController extends Controller
     {
         $juegos = Juego::orderby('id', 'desc')->paginate(10);
 
-        return view('juego.biblioteca');
+        return view('juego.biblioteca', compact('juegos'));
     }
 }

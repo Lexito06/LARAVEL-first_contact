@@ -188,6 +188,39 @@ body {
     width: 100%;
 }
 
+/* Search bar */
+
+        .search-container {
+            flex: 0 1 500px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 20px 10px 40px;
+            background: rgba(26, 42, 77, 0.7);
+            border: 1px solid #3a67b2;
+            border-radius: 20px;
+            color: #e6e9f0;
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            background: rgba(26, 42, 77, 0.9);
+            border-color: #4b81d5;
+            box-shadow: 0 0 8px rgba(75, 129, 213, 0.5);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7e9be8;
+        }
+
+
 /* Library button styles */
 .library-btn {
     background: linear-gradient(45deg, var(--secondary-color), var(--hover-color));
@@ -399,6 +432,19 @@ body {
     z-index: 0;
 }
 
+.game-card a {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+}
+
 .game-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
@@ -547,3 +593,44 @@ body {
 
 }
 
+
+/* Animación para estrellas fugaces */
+.shooting-star {
+    position: fixed;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, white, transparent);
+    animation: shootingstar 5s linear infinite;
+    opacity: 0;
+}
+
+@keyframes shootingstar {
+    0% {
+        transform: translateX(-100px) translateY(100px) rotate(45deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    20% {
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(calc(100vw + 100px)) translateY(calc(-100vh - 100px)) rotate(45deg);
+        opacity: 0;
+    }
+}
+
+/* Estrellas posicionadas al azar */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}

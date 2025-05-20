@@ -114,4 +114,10 @@ class JuegoController extends Controller
 
         return redirect()->route('juego.tienda');
     }
+
+    public function tienda()
+    {
+        $juegos = Juego::orderby('id', 'desc')->paginate(10);
+        return view('juego.tienda', compact('juegos'));
+    }
 }
