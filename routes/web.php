@@ -12,11 +12,10 @@ use Illuminate\Support\Facades\Auth;
 // y lo llamo __invoke
 
 
-/*
+
 Route::get('/', function () {
     return redirect()->route('juego.index');
-})->name('juego.index');
- */
+});
 
 
 /*
