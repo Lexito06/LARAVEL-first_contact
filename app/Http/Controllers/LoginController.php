@@ -22,7 +22,7 @@ class LoginController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        $user->id_rol = 3;
+        $user->id_rol = $request->id_rol;
 
         if ($request->password !== $request->password_confirmation) {
             return redirect()->back()->withErrors(['password' => 'Las contraseñas no coinciden.']);

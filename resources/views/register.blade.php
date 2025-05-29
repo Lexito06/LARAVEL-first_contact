@@ -47,7 +47,7 @@
                 <label>Confirmar contraseña</label>
             </div>
 
-            <input type="hidden" id="idRolInput" name="id_rol">
+            <input type="hidden" id="id_rol" name="id_rol" value="3">
 
             <button type="submit" id="loginBtn">Registrarse</button>
 

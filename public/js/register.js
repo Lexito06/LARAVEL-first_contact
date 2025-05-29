@@ -147,7 +147,6 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-
 // Script para manejar la selección de tipo de cuenta
 document.addEventListener('DOMContentLoaded', () => {
     const accountButtons = document.querySelectorAll('.account-btn');
@@ -165,14 +164,15 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(`Tipo de cuenta seleccionada: ${accountType}`);
         });
     });
-});
 
-// Asignar rol al usuario que se registra
 
-document.querySelectorAll('.account-btn').forEach(button => {
-    button.addEventListener('click', function () {
-        document.querySelectorAll('.account-btn').forEach(btn => btn.classList.remove('active'));
-        this.classList.add('active');
-        document.getElementById('idRolInput').value = this.dataset.type === 'developer' ? 2 : 3;
+    // Asignar rol al usuario que se registra
+
+    document.querySelectorAll('.account-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            document.querySelectorAll('.account-btn').forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            document.getElementById('id_rol').value = this.dataset.type === 'developer' ? 2 : 3;
+        });
     });
 });

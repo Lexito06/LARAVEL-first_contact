@@ -152,7 +152,7 @@
             <div class="container">
                 <div class="library-header">
                     <h2 class="section-title">Juegos Recomendados</h2>
-                    <a href="#" class="view-all">Ver todo <i class="fas fa-chevron-right"></i></a>
+                    <a href="{{ route('tienda') }}" class="view-all">Ver todo <i class="fas fa-chevron-right"></i></a>
                 </div>
                 <div class="game-grid">
                     @foreach ($juegos as $juego)

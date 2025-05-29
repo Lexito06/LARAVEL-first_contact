@@ -211,8 +211,10 @@
                                         <form action="{{ route('destroyCategoria', $categoria) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="action-btn delete"><i
-                                                    class="fas fa-trash"></i></button>
+                                            @if ($categoria->nombre !== 'Sin categoría')
+                                                <button type="submit" class="action-btn delete"><i
+                                                        class="fas fa-trash"></i></button>
+                                            @endif
                                         </form>
                                     </td>
                                 </tr>

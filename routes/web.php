@@ -32,9 +32,9 @@ Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.
 */
 
 // Login y tal
-Route::view('/login', 'login')->name('login');
+Route::view('/login', 'login')->name('login')->middleware('guest');
 
-Route::view('/register', 'register')->name('register');
+Route::view('/register', 'register')->name('register')->middleware('guest');
 
 Route::get('/juego/logged', [JuegoController::class, 'logged'])->middleware('auth')->name('logged');
 
