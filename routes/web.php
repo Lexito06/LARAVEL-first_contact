@@ -11,9 +11,14 @@ use Illuminate\Support\Facades\Auth;
 // No agrego método porque la clase solo tiene un método
 // y lo llamo __invoke
 
+
+/*
 Route::get('/', function () {
     return redirect()->route('juego.index');
 })->name('juego.index');
+ */
+
+
 /*
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 
