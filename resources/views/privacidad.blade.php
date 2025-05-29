@@ -1,331 +1,286 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Política de Privacidad</title>
-    <style>
-        /* Estilos generales */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Montserrat', 'Helvetica Neue', sans-serif;
-            background-color: #0a1529;
-            color: #e0e6f0;
-            background-image:
-                radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            line-height: 1.6;
-        }
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+    <!-- Iconos de Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-        /* Contenedor principal */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        header {
-            background: linear-gradient(135deg, #1a2a4d 0%, #0d1b33 100%);
-            padding: 40px 0;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Estrellas en el header */
-        .stars {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .star {
-            position: absolute;
-            background-color: #fff;
-            border-radius: 50%;
-            animation: twinkle 4s infinite ease-in-out;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.2; }
-            50% { opacity: 0.8; }
-        }
-
-        /* Título principal */
-        h1 {
-            font-size: 2.8rem;
-            color: #ffffff;
-            text-align: center;
-            margin: 0;
-            font-weight: 300;
-            letter-spacing: 1px;
-            position: relative;
-            z-index: 2;
-            text-shadow: 0 2px 10px rgba(0, 100, 255, 0.3);
-        }
-
-        /* Secciones */
-        section {
-            background: rgba(22, 38, 71, 0.8);
-            backdrop-filter: blur(10px);
-            margin: 40px 0;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(79, 122, 214, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(to right, #4f7ad6, #2a4580);
-        }
-
-        /* Títulos de secciones */
-        h2 {
-            color: #5d9aff;
-            font-size: 1.8rem;
-            margin-top: 0;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(93, 154, 255, 0.3);
-        }
-
-        h3 {
-            color: #8ab4ff;
-            font-size: 1.4rem;
-            margin-top: 25px;
-        }
-
-        /* Enlaces */
-        a {
-            color: #5d9aff;
-            text-decoration: none;
-            border-bottom: 1px dotted #5d9aff;
-            transition: all 0.3s ease;
-        }
-
-        a:hover {
-            color: #96c2ff;
-            border-bottom-color: #96c2ff;
-        }
-
-        /* Lista */
-        ul {
-            padding-left: 20px;
-        }
-
-        li {
-            margin-bottom: 10px;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 30px 0;
-            margin-top: 60px;
-            color: #8ab4ff;
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(93, 154, 255, 0.2);
-        }
-
-        /* Botón de contacto */
-        .contact-btn {
-            background: linear-gradient(135deg, #4f7ad6 0%, #375497 100%);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 30px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-block;
-            box-shadow: 0 4px 15px rgba(79, 122, 214, 0.3);
-            margin-top: 20px;
-        }
-
-        .contact-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(79, 122, 214, 0.4);
-        }
-
-        /* Fecha de actualización */
-        .update-date {
-            font-style: italic;
-            color: #8ab4ff;
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            section {
-                padding: 20px;
-            }
-
-            h2 {
-                font-size: 1.5rem;
-            }
-
-            h3 {
-                font-size: 1.2rem;
-            }
-        }
-    </style>
 </head>
+
 <body>
-    <!-- Generación dinámica de estrellas con JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const createStars = (element, count) => {
-                const container = document.createElement('div');
-                container.className = 'stars';
+    <canvas id="starfield"></canvas>
 
-                for (let i = 0; i < count; i++) {
-                    const star = document.createElement('div');
-                    star.className = 'star';
-
-                    // Tamaño aleatorio entre 1-3px
-                    const size = Math.random() * 2 + 1;
-                    star.style.width = `${size}px`;
-                    star.style.height = `${size}px`;
-
-                    // Posición aleatoria
-                    star.style.left = `${Math.random() * 100}%`;
-                    star.style.top = `${Math.random() * 100}%`;
-
-                    // Animación con delay aleatorio
-                    star.style.animationDelay = `${Math.random() * 4}s`;
-
-                    container.appendChild(star);
-                }
-
-                element.appendChild(container);
-            };
-
-            // Añadir estrellas al header
-            const header = document.querySelector('header');
-            createStars(header, 50);
-
-            // Añadir estrellas a cada sección
-            const sections = document.querySelectorAll('section');
-            sections.forEach(section => {
-                createStars(section, 20);
-            });
-        });
-    </script>
-
-    <header>
-        <div class="container">
-            <h1>Política de Privacidad</h1>
+    <nav class="nav-header">
+        <div class="logo">
+            <a href="{{ asset('juego') }}">
+                <img src="{{ asset('img/logoblanco.png') }}" alt="Logo de la web">
+            </a>
         </div>
-    </header>
+        <a href="{{ route('juego.index') }}" class="library-btn">
+            <i class="fas fa-house"></i> Página Principal
+        </a>
+    </nav>
 
     <div class="container">
-        <p class="update-date">Última actualización: 20 de mayo de 2025</p>
+        <header>
+            <h1>Política de Privacidad</h1>
+            <p>Protección y tratamiento de datos personales</p>
+        </header>
 
-        <section>
-            <h2>Introducción</h2>
-            <p>En [Nombre de la Empresa], respetamos su privacidad y nos comprometemos a proteger sus datos personales. Esta política de privacidad le informará sobre cómo cuidamos sus datos personales cuando visita nuestro sitio web y le informará sobre sus derechos de privacidad y cómo la ley lo protege.</p>
-            <p>Por favor, lea detenidamente esta política de privacidad para entender nuestras políticas y prácticas con respecto a sus datos personales y cómo los trataremos.</p>
-        </section>
+        <main>
+            <div class="table-of-contents">
+                <h3>Índice de Contenido</h3>
+                <ul>
+                    <li><a href="#introduccion">1. Introducción</a></li>
+                    <li><a href="#responsable">2. Responsable del Tratamiento</a></li>
+                    <li><a href="#datos-recopilados">3. Datos que Recopilamos</a></li>
+                    <li><a href="#finalidad">4. Finalidad del Tratamiento</a></li>
+                    <li><a href="#base-legal">5. Base Legal</a></li>
+                    <li><a href="#compartir-datos">6. Compartir Datos con Terceros</a></li>
+                    <li><a href="#transferencias">7. Transferencias Internacionales</a></li>
+                    <li><a href="#conservacion">8. Conservación de Datos</a></li>
+                    <li><a href="#derechos">9. Sus Derechos</a></li>
+                    <li><a href="#cookies">10. Cookies y Tecnologías Similares</a></li>
+                    <li><a href="#menores">11. Menores de Edad</a></li>
+                    <li><a href="#seguridad">12. Seguridad de los Datos</a></li>
+                    <li><a href="#modificaciones">13. Modificaciones</a></li>
+                </ul>
+            </div>
 
-        <section>
-            <h2>Información que recopilamos</h2>
-            <p>Podemos recopilar, utilizar, almacenar y transferir diferentes tipos de datos personales sobre usted, que hemos agrupado de la siguiente manera:</p>
-            <ul>
-                <li><strong>Datos de identidad:</strong> Incluye nombre, apellidos, nombre de usuario o identificador similar.</li>
-                <li><strong>Datos de contacto:</strong> Incluye dirección de correo electrónico y números de teléfono.</li>
-                <li><strong>Datos técnicos:</strong> Incluye dirección IP, datos de inicio de sesión, tipo y versión del navegador, configuración de zona horaria, tipos y versiones de plugins del navegador, sistema operativo y plataforma.</li>
-                <li><strong>Datos de perfil:</strong> Incluye su nombre de usuario y contraseña, compras o pedidos realizados por usted, sus intereses, preferencias, comentarios y respuestas a encuestas.</li>
-                <li><strong>Datos de uso:</strong> Incluye información sobre cómo utiliza nuestro sitio web y servicios.</li>
-            </ul>
+            <section id="introduccion">
+                <h2>1. Introducción</h2>
+                <p>En nuestra empresa, nos comprometemos a proteger su privacidad y a manejar sus datos personales de
+                    manera responsable y transparente. Esta Política de Privacidad explica cómo recopilamos, utilizamos,
+                    almacenamos y protegemos su información personal cuando utiliza nuestro sitio web y servicios.</p>
 
-            <h3>Cookies y tecnologías similares</h3>
-            <p>Utilizamos cookies y tecnologías de seguimiento similares para rastrear la actividad en nuestro sitio web y almacenar cierta información. Las cookies son archivos con una pequeña cantidad de datos que pueden incluir un identificador único anónimo.</p>
-            <p>Puede instruir a su navegador para que rechace todas las cookies o para que le avise cuando se envía una cookie. Sin embargo, si no acepta cookies, es posible que no pueda utilizar algunas partes de nuestro servicio.</p>
-        </section>
+                <div class="highlight">
+                    <p>Esta política cumple con el Reglamento General de Protección de Datos (RGPD) de la Unión Europea
+                        y la Ley Orgánica de Protección de Datos Personales y garantía de los derechos digitales
+                        (LOPDGDD) de España.</p>
+                </div>
+            </section>
 
-        <section>
-            <h2>Cómo utilizamos su información</h2>
-            <p>Utilizamos los datos que recopilamos para diversos fines, incluyendo:</p>
-            <ul>
-                <li>Proporcionar y mantener nuestro servicio</li>
-                <li>Notificarle sobre cambios en nuestro servicio</li>
-                <li>Permitirle participar en funciones interactivas de nuestro servicio cuando decida hacerlo</li>
-                <li>Proporcionar atención y soporte al cliente</li>
-                <li>Proporcionar análisis o información valiosa para que podamos mejorar el servicio</li>
-                <li>Monitorear el uso del servicio</li>
-                <li>Detectar, prevenir y abordar problemas técnicos</li>
-                <li>Cumplir con cualquier otro propósito para el cual la proporcione</li>
-            </ul>
-        </section>
+            <section id="responsable">
+                <h2>2. Responsable del Tratamiento</h2>
+                <div class="contact-info">
+                    <h4>Datos del Responsable:</h4>
+                    <p><strong>Razón Social:</strong> Lúmina S.L.</p>
+                    <p><strong>CIF:</strong> B-12345678</p>
+                    <p><strong>Dirección:</strong> Calle Ejemplo, 123, 28001 Madrid, España</p>
+                    <p><strong>Teléfono:</strong> +34 900 123 456</p>
+                    <p><strong>Email:</strong> privacidad@tuempresa.com</p>
+                </div>
+            </section>
 
-        <section>
-            <h2>Divulgación de sus datos personales</h2>
-            <p>Podemos compartir su información personal con las siguientes partes:</p>
-            <ul>
-                <li><strong>Proveedores de servicios:</strong> Para realizar tareas de servicio en nuestro nombre.</li>
-                <li><strong>Socios comerciales:</strong> Para ofrecerle ciertos productos, servicios o promociones.</li>
-                <li><strong>Autoridades:</strong> Cuando sea requerido por la ley o en respuesta a solicitudes legales válidas.</li>
-            </ul>
-            <p>No venderemos, alquilaremos ni compartiremos su información personal con terceros sin su consentimiento, excepto según lo descrito en esta Política de Privacidad.</p>
-        </section>
+            <section id="datos-recopilados">
+                <h2>3. Datos que Recopilamos</h2>
+                <p>Podemos recopilar los siguientes tipos de información personal:</p>
 
-        <section>
-            <h2>Seguridad de datos</h2>
-            <p>La seguridad de sus datos es importante para nosotros, pero recuerde que ningún método de transmisión por Internet o método de almacenamiento electrónico es 100% seguro. Mientras nos esforzamos por utilizar medios comercialmente aceptables para proteger sus datos personales, no podemos garantizar su seguridad absoluta.</p>
-            <p>Hemos implementado medidas técnicas y organizativas apropiadas para proteger sus datos personales contra la pérdida accidental, el acceso no autorizado, la alteración y la divulgación.</p>
-        </section>
+                <h3>3.1 Datos de Identificación</h3>
+                <ul>
+                    <li>Nombre y apellidos</li>
+                    <li>Dirección de correo electrónico</li>
+                    <li>Número de teléfono</li>
+                    <li>Dirección postal</li>
+                    <li>Fecha de nacimiento</li>
+                </ul>
 
-        <section>
-            <h2>Sus derechos legales</h2>
-            <p>Dependiendo de su ubicación, puede tener ciertos derechos con respecto a sus datos personales, como:</p>
-            <ul>
-                <li>El derecho a acceder, actualizar o eliminar la información que tenemos sobre usted</li>
-                <li>El derecho de rectificación</li>
-                <li>El derecho a oponerse</li>
-                <li>El derecho a la restricción del procesamiento</li>
-                <li>El derecho a la portabilidad de datos</li>
-                <li>El derecho a retirar el consentimiento</li>
-            </ul>
-            <p>Si desea ejercer alguno de estos derechos, contáctenos utilizando la información proporcionada a continuación.</p>
-        </section>
+                <h3>3.2 Datos de Navegación</h3>
+                <ul>
+                    <li>Dirección IP</li>
+                    <li>Tipo de navegador y versión</li>
+                    <li>Sistema operativo</li>
+                    <li>Páginas visitadas y tiempo de permanencia</li>
+                    <li>Referencia de origen (desde qué página llegó)</li>
+                    <li>Cookies y tecnologías similares</li>
+                </ul>
 
-        <section>
-            <h2>Cambios a esta política de privacidad</h2>
-            <p>Podemos actualizar nuestra Política de Privacidad de vez en cuando. Le notificaremos cualquier cambio publicando la nueva Política de Privacidad en esta página.</p>
-            <p>Le recomendamos que revise esta Política de Privacidad periódicamente para cualquier cambio. Los cambios a esta Política de Privacidad son efectivos cuando se publican en esta página.</p>
-        </section>
+                <h3>3.3 Datos de Transacciones</h3>
+                <ul>
+                    <li>Historial de compras</li>
+                    <li>Información de facturación</li>
+                    <li>Preferencias de productos</li>
+                    <li>Comunicaciones con nuestro servicio al cliente</li>
+                </ul>
+            </section>
 
-        <section>
-            <h2>Contáctenos</h2>
-            <p>Si tiene alguna pregunta sobre esta Política de Privacidad, puede contactarnos:</p>
-            <ul>
-                <li>Por correo electrónico: privacy@empresa.com</li>
-                <li>Por teléfono: +12 345 678 910</li>
-                <li>Por correo postal: Calle Principal 123, Ciudad, CP 12345, País</li>
-            </ul>
-            <a href="#" class="contact-btn">Formulario de contacto</a>
-        </section>
+            <section id="finalidad">
+                <h2>4. Finalidad del Tratamiento</h2>
+                <p>Utilizamos sus datos personales para las siguientes finalidades:</p>
+
+                <h3>4.1 Prestación de Servicios</h3>
+                <ul>
+                    <li>Procesar sus pedidos y transacciones</li>
+                    <li>Gestionar su cuenta de usuario</li>
+                    <li>Proporcionar servicio al cliente</li>
+                    <li>Resolver consultas y reclamaciones</li>
+                </ul>
+
+                <h3>4.2 Marketing y Comunicación</h3>
+                <ul>
+                    <li>Envío de newsletters y promociones (con su consentimiento)</li>
+                    <li>Personalización de contenido y ofertas</li>
+                    <li>Análisis de preferencias y comportamiento</li>
+                    <li>Comunicaciones de servicio importantes</li>
+                </ul>
+
+                <h3>4.3 Mejora y Desarrollo</h3>
+                <ul>
+                    <li>Análisis y mejora de nuestros servicios</li>
+                    <li>Desarrollo de nuevas funcionalidades</li>
+                    <li>Investigación de mercado</li>
+                    <li>Pruebas de usabilidad</li>
+                </ul>
+            </section>
+
+            <section id="base-legal">
+                <h2>5. Base Legal</h2>
+                <p>El tratamiento de sus datos personales se basa en:</p>
+                <ul>
+                    <li><strong>Consentimiento:</strong> Para marketing directo y cookies no esenciales</li>
+                    <li><strong>Ejecución contractual:</strong> Para la prestación de servicios solicitados</li>
+                    <li><strong>Interés legítimo:</strong> Para mejorar nuestros servicios y seguridad</li>
+                    <li><strong>Obligación legal:</strong> Para cumplir con requisitos fiscales y legales</li>
+                </ul>
+            </section>
+
+            <section id="compartir-datos">
+                <h2>6. Compartir Datos con Terceros</h2>
+                <p>Podemos compartir sus datos personales con:</p>
+
+                <h3>6.1 Proveedores de Servicios</h3>
+                <ul>
+                    <li>Procesadores de pagos</li>
+                    <li>Servicios de hosting y almacenamiento</li>
+                    <li>Plataformas de marketing por correo electrónico</li>
+                    <li>Servicios de análisis web</li>
+                </ul>
+
+                <h3>6.2 Autoridades Competentes</h3>
+                <p>Cuando sea requerido por ley o para proteger nuestros derechos legítimos.</p>
+
+                <div class="highlight">
+                    <p>Nunca vendemos, alquilamos o comercializamos sus datos personales con terceros para sus propios
+                        fines de marketing.</p>
+                </div>
+            </section>
+
+            <section id="transferencias">
+                <h2>7. Transferencias Internacionales</h2>
+                <p>Algunos de nuestros proveedores de servicios pueden estar ubicados fuera del Espacio Económico
+                    Europeo (EEE). En estos casos, garantizamos que:</p>
+                <ul>
+                    <li>Existen decisiones de adecuación de la Comisión Europea</li>
+                    <li>Se han implementado las Cláusulas Contractuales Tipo</li>
+                    <li>Los proveedores cuentan con certificaciones adecuadas</li>
+                    <li>Se mantienen las mismas garantías de protección</li>
+                </ul>
+            </section>
+
+            <section id="conservacion">
+                <h2>8. Conservación de Datos</h2>
+                <p>Conservamos sus datos personales durante el tiempo necesario para:</p>
+                <ul>
+                    <li><strong>Datos de cuenta:</strong> Mientras mantenga su cuenta activa</li>
+                    <li><strong>Datos de transacciones:</strong> 6 años por obligaciones fiscales</li>
+                    <li><strong>Datos de marketing:</strong> Hasta que retire su consentimiento</li>
+                    <li><strong>Datos de navegación:</strong> Máximo 24 meses</li>
+                </ul>
+            </section>
+
+            <section id="derechos">
+                <h2>9. Sus Derechos</h2>
+                <p>Como titular de datos personales, tiene derecho a:</p>
+
+                <h3>9.1 Derechos Fundamentales</h3>
+                <ul>
+                    <li><strong>Acceso:</strong> Conocer qué datos procesamos sobre usted</li>
+                    <li><strong>Rectificación:</strong> Corregir datos inexactos o incompletos</li>
+                    <li><strong>Supresión:</strong> Eliminar sus datos cuando ya no sean necesarios</li>
+                    <li><strong>Limitación:</strong> Restringir el procesamiento en ciertos casos</li>
+                </ul>
+
+                <h3>9.2 Derechos Adicionales</h3>
+                <ul>
+                    <li><strong>Portabilidad:</strong> Recibir sus datos en formato estructurado</li>
+                    <li><strong>Oposición:</strong> Oponerse al procesamiento por interés legítimo</li>
+                    <li><strong>Decisiones automatizadas:</strong> No estar sujeto a decisiones basadas únicamente en
+                        procesamiento automatizado</li>
+                </ul>
+
+                <div class="highlight">
+                    <p>Para ejercer sus derechos, contáctenos en privacidad@tuempresa.com. Responderemos en un plazo
+                        máximo de 30 días.</p>
+                </div>
+            </section>
+
+            <section id="cookies">
+                <h2>10. Cookies y Tecnologías Similares</h2>
+                <p>Utilizamos cookies y tecnologías similares para:</p>
+
+                <h3>10.1 Tipos de Cookies</h3>
+                <ul>
+                    <li><strong>Cookies esenciales:</strong> Necesarias para el funcionamiento del sitio</li>
+                    <li><strong>Cookies de rendimiento:</strong> Para analizar el uso del sitio</li>
+                    <li><strong>Cookies de funcionalidad:</strong> Para recordar sus preferencias</li>
+                    <li><strong>Cookies de marketing:</strong> Para personalizar anuncios</li>
+                </ul>
+
+                <p>Puede gestionar sus preferencias de cookies a través de la configuración de su navegador o nuestro
+                    centro de preferencias.</p>
+            </section>
+
+            <section id="menores">
+                <h2>11. Menores de Edad</h2>
+                <p>Nuestros servicios no están dirigidos a menores de 16 años. No recopilamos conscientemente datos
+                    personales de menores sin el consentimiento de sus padres o tutores legales.</p>
+                <p>Si descubrimos que hemos recopilado datos de un menor sin consentimiento apropiado, eliminaremos
+                    dicha información de inmediato.</p>
+            </section>
+
+            <section id="seguridad">
+                <h2>12. Seguridad de los Datos</h2>
+                <p>Implementamos medidas técnicas y organizativas apropiadas para proteger sus datos personales:</p>
+                <ul>
+                    <li>Cifrado de datos en tránsito y en reposo</li>
+                    <li>Controles de acceso estrictos</li>
+                    <li>Auditorías de seguridad regulares</li>
+                    <li>Formación del personal en protección de datos</li>
+                    <li>Planes de respuesta a incidentes</li>
+                </ul>
+            </section>
+
+            <section id="modificaciones">
+                <h2>13. Modificaciones</h2>
+                <p>Podemos actualizar esta Política de Privacidad ocasionalmente. Las modificaciones significativas
+                    serán comunicadas mediante:</p>
+                <ul>
+                    <li>Notificación por correo electrónico</li>
+                    <li>Aviso destacado en nuestro sitio web</li>
+                    <li>Actualización de la fecha de última modificación</li>
+                </ul>
+                <p>Le recomendamos revisar periódicamente esta política para mantenerse informado sobre cómo protegemos
+                    su información.</p>
+            </section>
+
+            <div class="effective-date">
+                <p>Última actualización: 29 de mayo de 2025</p>
+            </div>
+        </main>
 
         <footer>
-            <p>&copy; 2025 [Nombre de la Empresa]. Todos los derechos reservados.</p>
+            <p>&copy; 2025 Lúmina. Todos los derechos reservados.</p>
         </footer>
-    </div>  
+    </div>
+
+    <a href="#" class="back-to-top" title="Volver arriba">↑</a>
+
+    <script src="{{ asset('js/footer.js') }}"></script>
+
 </body>
+
 </html>

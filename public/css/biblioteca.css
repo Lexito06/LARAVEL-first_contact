@@ -20,9 +20,9 @@
 body {
     background-color: var(--background-color);
     background-image:
-        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
-        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
-        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
+        radial-gradient(white, rgba(255, 255, 255, .2) 2px, transparent 3px),
+        radial-gradient(white, rgba(255, 255, 255, .15) 1px, transparent 2px),
+        radial-gradient(white, rgba(255, 255, 255, .1) 2px, transparent 3px);
     background-size: 550px 550px, 350px 350px, 250px 250px;
     background-position: 0 0, 40px 60px, 130px 270px;
     color: var(--text-color);
@@ -57,9 +57,17 @@ body {
 
 /* Animación para efecto de estrellas titilantes */
 @keyframes twinkle {
-    0% { opacity: 0.3; }
-    50% { opacity: 1; }
-    100% { opacity: 0.3; }
+    0% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.3;
+    }
 }
 
 
@@ -382,12 +390,36 @@ body {
     height: 100%;
 }
 
+.carousel-category {
+    margin-bottom: 15px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.category-tag {
+    background: linear-gradient(45deg, var(--secondary-color), var(--hover-color));
+    color: #000;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+}
+
 .game-meta {
     display: flex;
     justify-content: space-between;
     margin-top: auto;
     font-size: 0.9rem;
     color: #b8b8b8;
+}
+
+.rating {
+    color: #ffd700;
+    font-size: 1.1rem;
 }
 
 .categories {

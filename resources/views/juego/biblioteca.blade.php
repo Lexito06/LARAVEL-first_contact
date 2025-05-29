@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estelar - Tu Biblioteca de Juegos</title>
+    <title>Tu Biblioteca de Juegos</title>
     <link rel="stylesheet" href="{{ asset('css/biblioteca.css') }}">
     <!-- Iconos de Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -24,21 +24,12 @@
                     <img src="{{ asset('img/logoblanco.png') }}" alt="Logo de la web">
                 </a>
             </div>
-            <div class="search-container">
-                <input type="text" class="search-input" placeholder="Buscar juegos...">
-                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-            </div>
 
             <div class="user-actions">
                 <a href="{{ route('tienda') }}" class="library-btn">
                     <i class="fas fa-bag-shopping"></i> Tienda
                 </a>
-                <!-- Botón de biblioteca -->
+                <!-- Botón de página principal -->
                 <a href="{{ route('juego.index') }}" class="library-btn">
                     <i class="fas fa-house"></i> Página Principal
                 </a>
@@ -53,14 +44,22 @@
                             <i class="fas fa-user-circle"></i>
                             <a href="{{ asset('perfil') }}">Mi Perfil</a>
                         </div>
-                        <div class="user-dropdown-item">
-                            <i class="fas fa-wallet"></i>
-                            <a href="#">Cartera</a>
-                        </div>
-                        <div class="user-dropdown-item">
-                            <i class="fas fa-heart"></i>
-                            <a href="#">Lista de deseos</a>
-                        </div>
+                        @auth
+                            @if (Auth::user()->id_rol == 1)
+                                <div class="user-dropdown-item">
+                                    <i class="fas fa-gear"></i>
+                                    <a href="{{ route('admin') }}">Administrar</a>
+                                </div>
+                            @endif
+                        @endauth
+                        @auth
+                            @if (Auth::user()->id_rol == 2 || Auth::user()->id_rol == 1)
+                                <div class="user-dropdown-item">
+                                    <i class="fas fa-upload"></i>
+                                    <a href="{{ route('create') }}">Subir juego</a>
+                                </div>
+                            @endif
+                        @endauth
                         <div class="user-dropdown-item">
                             <i class="fas fa-sign-out-alt"></i>
                             <a href="{{ asset('logout') }}">Cerrar Sesión</a>
@@ -76,28 +75,21 @@
         <div class="stats-row">
             <div class="stat-card">
                 <i class="fas fa-thumbs-up"></i>
-                <div class="stat-value">42</div>
+                <div class="stat-value">{{ $totalJuegos }}</div>
                 <div class="stat-label">Juegos en posesión</div>
             </div>
             <div class="stat-card">
                 <i class="fas fa-tag"></i>
-                <div class="stat-value">16</div>
+                <div class="stat-value">{{ $totalGastado }}€</div>
                 <div class="stat-label">Dinero gastado</div>
             </div>
         </div>
 
         <div class="categories">
             <button class="category active">Todos</button>
-            <button class="category">Recientes</button>
-            <button class="category">Acción</button>
-            <button class="category">Aventura</button>
-            <button class="category">Deportes</button>
-            <button class="category">Carreras</button>
-            <button class="category">Lucha</button>
-            <button class="category">Simulación</button>
-            <button class="category">Estrategia</button>
-            <button class="category">Puzzle</button>
-            <button class="category">Plataformas</button>
+            @foreach ($categorias as $categoria)
+                <button class="category">{{ $categoria->nombre }}</button>
+            @endforeach
         </div>
 
         <h2 class="section-title">Todos mis juegos</h2>
@@ -106,12 +98,25 @@
             @foreach ($juegos as $juego)
                 <div class="game-card" data-categoria="{{ strtolower($juego->categoria->nombre) }}">
                     <a href="{{ route('juego.show', $juego) }}">
-                        <img src="" alt="Imagen del juego">
+                        @php
+                            $imgPath = null;
+                            $basePath = public_path('img/juego' . $juego->id);
+                            $extensiones = ['.jpeg', '.jpg', '.png', '.webp'];
+                            foreach ($extensiones as $ext) {
+                                if (file_exists($basePath . $ext)) {
+                                    $imgPath = 'img/juego' . $juego->id . $ext;
+                                    break;
+                                }
+                            }
+                        @endphp
+                        <img src="{{ asset($imgPath ?? 'img/default.jpg') }}" alt="Imagen del juego">
                         <div class="game-info">
                             <div class="game-title">{{ $juego->nombre }}</div>
+                            <div class="carousel-category">
+                                <span class="category-tag">{{ $juego->categoria->nombre }}</span>
+                            </div>
                             <div class="game-meta">
-                                <span><i class="fas fa-star"></i> 4.8</span>
-                                <span>{{ $juego->precio }}</span>
+                                <span class="rating"><i class="fas fa-star"></i> {{ $juego->nota }}</span>
                             </div>
                         </div>
                     </a>
@@ -128,18 +133,16 @@
                     <li><a href="#">Acerca de nosotros</a></li>
                     <li><a href="#">Política de privacidad</a></li>
                     <li><a href="#">Términos y condiciones</a></li>
-                    <li><a href="#">Contacto</a></li>
                 </ul>
             </div>
             <div class="footer-social">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-discord"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="https://x.com/Kansky06_"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/kansky06_/"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com/Lexito06"><i class="fab fa-github"></i></a>
+                <a href="https://www.youtube.com/@kansky0634"><i class="fab fa-youtube"></i></a>
             </div>
             <div class="footer-copyright">
-                <p>&copy; 2025 Mi Página Web. Todos los derechos reservados.</p>
+                <p>&copy; 2025 Lúmina. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>

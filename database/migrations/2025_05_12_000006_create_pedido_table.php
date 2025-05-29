@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('pedido', function (Blueprint $table) {
             $table->id(); // id_pedido
-            $table->date('fecha_compra');
             $table->foreignId('id_usuario')->constrained('users')->onDelete('cascade')->onUpdate('cascade'); // Clave foránea
+            $table->foreignId('id_juego')->constrained('juego')->onDelete('cascade')->onUpdate('cascade'); // Clave foránea
+            $table->decimal('precio', 5, 2);
             $table->timestamps();
         });
     }

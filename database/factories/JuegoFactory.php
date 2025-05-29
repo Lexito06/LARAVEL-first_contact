@@ -19,8 +19,9 @@ class JuegoFactory extends Factory
     {
         return [
             'nombre' => $this->faker->word(),
-            'descripcion' => $this->faker->sentence(),
+            'descripcion' => $this->faker->text(500),
             'precio' => $this->faker->randomFloat(2, 1, 100),
+            'nota' => $this->faker->numberBetween(0, 5),
         ];
     }
 }

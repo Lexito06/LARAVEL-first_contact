@@ -17,9 +17,15 @@ class Pedido extends Model
         return $this->belongsTo(User::class, 'id_usuario');
     }
 
+    public function juego()
+    {
+        return $this->belongsTo(Juego::class, 'id_juego');
+    }
+
     public function juegos()
     {
         return $this->belongsToMany(Juego::class, 'pedido_juegos', 'id_pedido', 'id_juego')
-                    ->withPivot('precio_unitario');
+            ->withPivot('precio');
     }
+
 }

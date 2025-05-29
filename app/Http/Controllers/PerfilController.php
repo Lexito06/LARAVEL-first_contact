@@ -16,8 +16,6 @@ class PerfilController extends Controller
 
     public function edit(User $user)
     {
-
-        // $post = Post::find($post);
         $user = Auth::user();
 
         return view('perfil-edit', compact('user'));

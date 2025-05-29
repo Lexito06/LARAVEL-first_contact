@@ -82,33 +82,6 @@
             </div>
         </div>
 
-        <div class="seccion">
-            <div class="seccion-header">
-                <h2><i class="fas fa-gamepad"></i> Mis Juegos</h2>
-            </div>
-
-            <ul class="game-list">
-                <li class="game-item">
-                    <span>Juego 1</span>
-                    <div class="game-icon">
-                        <i class="fas fa-dice"></i>
-                    </div>
-                </li>
-                <li class="game-item">
-                    <span>Juego 2</span>
-                    <div class="game-icon">
-                        <i class="fas fa-chess-knight"></i>
-                    </div>
-                </li>
-                <li class="game-item">
-                    <span>Juego 3</span>
-                    <div class="game-icon">
-                        <i class="fas fa-puzzle-piece"></i>
-                    </div>
-                </li>
-            </ul>
-        </div>
-
         <div class="action-buttons">
             <a href="{{ route('perfil-edit', ['user' => $user->id]) }}" class="btn btn-primary">
                 <i class="fas fa-edit"></i> Editar perfil

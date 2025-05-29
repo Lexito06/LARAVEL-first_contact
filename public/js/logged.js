@@ -75,33 +75,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Función para crear estrellas fugaces
-    function createShootingStars() {
-        setInterval(() => {
-            if (Math.random() > 0.9) { // 10% de probabilidad
-                const shootingStar = document.createElement('div');
-                shootingStar.classList.add('shooting-star');
-
-                // Posición aleatoria
-                shootingStar.style.top = `${Math.random() * 70}%`;
-                shootingStar.style.left = `${Math.random() * 100}%`;
-
-                // Duración aleatoria
-                const duration = Math.random() * 2 + 3;
-                shootingStar.style.animationDuration = `${duration}s`;
-
-                document.body.appendChild(shootingStar);
-
-                // Eliminar la estrella fugaz después de la animación
-                setTimeout(() => {
-                    document.body.removeChild(shootingStar);
-                }, duration * 1000);
-            }
-        }, 2000);
-    }
     // Inicializar las estrellas y estrellas fugaces
     createStars();
-    createShootingStars();
+
     // Inicializar el carrusel
     showSlide(currentIndex);
 

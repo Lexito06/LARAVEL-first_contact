@@ -12,7 +12,7 @@ class Juego extends Model
     use HasFactory;
 
     protected $table = 'juego';
-    protected $fillable = ['nombre', 'descripcion', 'precio', 'id_categoria'];
+    protected $fillable = ['nombre', 'descripcion', 'precio', 'id_categoria', 'nota'];
 
     public function categoria()
     {
@@ -27,7 +27,7 @@ class Juego extends Model
     public function pedidos()
     {
         return $this->belongsToMany(Pedido::class, 'pedido_juegos', 'id_juego', 'id_pedido')
-                    ->withPivot('precio_unitario');
+                    ->withPivot('precio');
     }
     protected function casts(): array
     {

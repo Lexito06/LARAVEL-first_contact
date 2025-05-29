@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('biblioteca', function (Blueprint $table) {
             $table->foreignId('id_usuario')->constrained('users')->onDelete('cascade')->onUpdate('cascade'); // Clave foránea
             $table->foreignId('id_juego')->constrained('juego')->onDelete('cascade')->onUpdate('cascade'); // Clave foránea
-            $table->date('fecha_adquisicion');
             $table->timestamps();
         });
     }

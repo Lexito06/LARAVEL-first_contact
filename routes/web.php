@@ -1,23 +1,19 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BibliotecaController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JuegoController;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\LoginController;
-use App\Models\Post;
-use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Auth;
 
 // No agrego método porque la clase solo tiene un método
 // y lo llamo __invoke
 
-
-
-Route::get('/', [HomeController::class, 'home']);
-
+Route::get('/', function () {
+    return redirect()->route('juego.index');
+})->name('juego.index');
 /*
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 
@@ -54,17 +50,56 @@ Route::get('/perfil', function () {
 })->name('perfil')->middleware('auth');
 
 Route::get('/perfil/{user}/edit', [PerfilController::class, 'edit'])->name('perfil-edit')->middleware('auth');
-Route::put('/perfil/{user}', [PerfilController::class, 'update'])->middleware('auth')->name('perfil-update')->middleware('auth');
+Route::put('/perfil/{user}', [PerfilController::class, 'update'])->name('perfil-update')->middleware('auth');
 
 // Biblioteca
 Route::get('/juego/biblioteca', [BibliotecaController::class, 'biblioteca'])->name('biblioteca')->middleware('auth');
+// Añadir un juego a la biblioteca y crear un pedido
+Route::post('/biblioteca/agregar/{juego}', [BibliotecaController::class, 'agregar'])->name('biblioteca.agregar')->middleware('auth');
+
+// Ruta para admin
+Route::get('/admin', [AdminController::class, 'index'])->name('admin')->middleware(['auth', 'admin']);
+
+// Para admin borrar pedido
+Route::delete('/admin/pedidos/{pedido}', [AdminController::class, 'destroyPedido'])->name('destroyPedido')->middleware(['auth', 'admin']);
+
+// Para admin borrar usuario
+Route::delete('/admin/usuarios/{usuario}', [AdminController::class, 'destroyUsuario'])->name('destroyUsuario')->middleware(['auth', 'admin']);
+// Para admin editar usuario
+Route::get('/admin/usuarios/{usuario}/edit', [AdminController::class, 'editUsuario'])->name('editUsuario')->middleware(['auth', 'admin']);
+// Para admin actualizar usuario
+Route::put('/admin/usuarios/{usuario}', [AdminController::class, 'updateUsuario'])->name('updateUsuario');
+
+// Para admin borrar juego
+Route::delete('/admin/juegos/{juego}', [AdminController::class, 'destroyJuego'])->name('destroyJuego')->middleware(['auth', 'admin']);
+// Para admin editar juego
+Route::get('/admin/juegos/{juego}/edit', [AdminController::class, 'editJuego'])->name('editJuego')->middleware(['auth', 'admin']);
+// Para admin actualizar juego
+Route::put('/admin/juegos/{juego}', [AdminController::class, 'updateJuego'])->name('updateJuego')->middleware(['auth', 'admin']);
+
+//Para admin borrar categoría
+Route::delete('/admin/categorias/{categoria}', [AdminController::class, 'destroyCategoria'])->name('destroyCategoria')->middleware(['auth', 'admin']);
+// Para admin editar categoría
+Route::get('/admin/categorias/{categoria}/edit', [AdminController::class, 'editCategoria'])->name('editCategoria')->middleware(['auth', 'admin']);
+// Para admin actualizar categoría
+Route::put('/admin/categorias/{categoria}', [AdminController::class, 'updateCategoria'])->name('updateCategoria')->middleware(['auth', 'admin']);
+// Para admin crear categoría
+Route::get('/admin/categorias/create', [AdminController::class, 'createCategoria'])->name('createCategoria')->middleware(['auth', 'admin']);
+// Para admin almacenar categoría
+Route::post('/admin/categorias', [AdminController::class, 'storeCategoria'])->name('storeCategoria')->middleware(['auth', 'admin']);
+
+// Ruta para desarrollador
+Route::get('/developer/crear', [JuegoController::class, 'create'])->name('create')->middleware(['auth', 'developer']);
+Route::post('/developer', [JuegoController::class, 'store'])->name('store')->middleware(['auth', 'developer']);
 
 // Tienda
 Route::get('/juego/tienda', [JuegoController::class, 'tienda'])->name('tienda');
-Route::get('/juego/tiendalogged', [JuegoController::class, 'tiendalogged'])->name('tiendalogged')->middleware('auth');
+Route::get('/juego/tienda/all', [JuegoController::class, 'all'])->name('all');
 
-// Rutas de los posts
-Route::resource('posts', PostController::class);
+// Footer
+Route::view('tyc', 'tyc')->name('tyc');
+Route::view('privacidad', 'privacidad')->name('privacidad');
+Route::view('acerca', 'acerca')->name('acerca');
 
 // Rutas de los juegos
 Route::resource('juego', JuegoController::class);
@@ -88,59 +123,3 @@ Route::get('/posts/{post}/{category}', function ($post, $category) {
     return "Aquí estará el post {$post} de la categoría {$category}";
 });
 */
-
-Route::get('prueba', function () {
-
-    /*
-    // Crear un nuevo registro en la tabla posts
-    $post = new Post;
-
-    $post->title = 'Título de prueba';
-    $post->content = 'Contenido de prueba';
-    $post->categoria = 'Categoría de prueba';
-
-    $post->save();
-
-    return $post;
-    */
-    /*
-    $post = Post::find(1);
-
-    return $post;
-    */
-
-    /* Actualizar un registro en la tabla posts
-    $post = Post::where('title', 'Titulo de prueba')->first();
-
-    $post->categoria = 'Desarrollo web';
-    $post->save();
-
-    return $post;
-    */
-
-    // Devolvería todos los registros
-    // $posts = Post::get();
-
-    // Devolvería todos los registros con un filtro en el id
-    // $posts = Post::where('id', '>=', '2')->get();
-
-    // Devolvería todos los registros
-    // Ordenados "asc" | "desc"
-    // Haciendo una consulta de las columnas que queremos
-    // La cantidad de registros que queremos que devuelva (take)
-    // $posts = Post::orderBy('id', 'desc')->select('id', 'title', 'content')->take(2)->get();
-
-    /*
-    $post = Post::find(1);
-    $post->delete();
-
-    return 'Eliminado correctamente';
-    */
-
-    $post = Post::find(1);
-
-    dd($post->is_active);
-
-    // return $post->published_at->format('d/m/Y');
-    // return $post->created_at->diffForHumans()->format('d/m/Y');
-});

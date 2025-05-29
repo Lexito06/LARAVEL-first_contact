@@ -93,7 +93,7 @@
     "Internal Server Error": "Error interno del servidor",
     "Introduction": "Introducción",
     "Invalid filename.": "Nombre de archivo no válido.",
-    "Invalid JSON was returned from the route.": "Se devolvió un JSON no válido desde la ruta.",
+    "Invalid JSON was returned from the .": "Se devolvió un JSON no válido desde la ruta.",
     "Invalid SSL Certificate": "Certificado SSL no válido",
     "length": "longitud",
     "Length Required": "Longitud requerida",

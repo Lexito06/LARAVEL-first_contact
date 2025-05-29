@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Perfil</title>
+    <title>Editar perfil</title>
     <link rel="stylesheet" href="{{ asset('css/perfil.css') }}">
     <!-- Iconos de Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -53,6 +53,14 @@
                             <span>Contraseña</span>
                         </div>
                         <input type="password" id="password" name="password" placeholder="Nueva contraseña">
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">
+                            <i class="fas fa-lock"></i>
+                            <span>Confirmar contraseña</span>
+                        </div>
+                        <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirmar contraseña">
                     </div>
                 </div>
             </div>

@@ -24,32 +24,10 @@ class StoreJuegoRequest extends FormRequest
         return [
             'nombre' => 'required|min:5|max:255',
             'descripcion' => 'required',
-            'precio' => 'required',
-            'id_categoria' => 'required|exists:categorias,id',
-        ];
-    }
-/*
-    public function messages(): array
-    {
-        return [
-            'title.required' => 'El :attribute es obligatorio',
-            'title.min' => 'El título debe tener al menos 5 caracteres',
-            'title.max' => 'El título no puede tener más de 255 caracteres',
-            'slug.required' => 'El slug es obligatorio',
-            'slug.unique' => 'El slug ya existe',
-            'content.required' => 'El contenido es obligatorio',
-            'category.required' => 'La categoría es obligatoria',
+            'precio' => 'required|numeric|min:0',
+            'nota' => 'integer|min:0|max:5',
+            'id_categoria' => 'required|exists:categoria,id',
         ];
     }
 
-    public function attributes(): array
-    {
-        return [
-            'title' => 'Título',
-            'slug' => 'Slug',
-            'content' => 'Contenido',
-            'category' => 'Categoría',
-        ];
-    }
-*/
 }
