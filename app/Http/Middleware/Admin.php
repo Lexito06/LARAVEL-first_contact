@@ -5,6 +5,9 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Middleware que maneja la solicitud entrante y verifica si el usuario es administrador.
+ */
 class Admin
 {
     public function handle($request, Closure $next)

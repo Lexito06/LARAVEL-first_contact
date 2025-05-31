@@ -7,8 +7,16 @@ use App\Models\Juego;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Controlador para la gestión de la biblioteca de juegos del usuario
+ * Permite ver los juegos en la biblioteca, agregar nuevos juegos y calcular totales
+ */
 class BibliotecaController extends Controller
 {
+    /**
+     * Muestra la biblioteca del usuario con los juegos que posee
+     * Incluye el total de juegos y el total gastado en ellos
+     */
     public function biblioteca()
     {
         $userId = Auth::id();
@@ -35,6 +43,10 @@ class BibliotecaController extends Controller
         return view('juego.biblioteca', compact('juegos', 'totalGastado', 'totalJuegos', 'categorias'));
     }
 
+    /**
+     * Agrega un juego a la biblioteca del usuario y registra el pedido
+     * Evita duplicados en la biblioteca
+     */
     public function agregar($juegoId)
     {
         $userId = Auth::id();

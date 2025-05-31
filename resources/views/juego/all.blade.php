@@ -156,11 +156,11 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-links">
-                <ul>
-                    <li><a href="#">Acerca de nosotros</a></li>
-                    <li><a href="#">Política de privacidad</a></li>
-                    <li><a href="#">Términos y condiciones</a></li>
-                </ul>
+                    <ul>
+                        <li><a href="{{ route('acerca') }}">Acerca de nosotros</a></li>
+                        <li><a href="{{ route('privacidad') }}">Política de privacidad</a></li>
+                        <li><a href="{{ route('tyc') }}">Términos y condiciones</a></li>
+                    </ul>
             </div>
             <div class="footer-social">
                 <a href="https://x.com/Kansky06_"><i class="fab fa-twitter"></i></a>

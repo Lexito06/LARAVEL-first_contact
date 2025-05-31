@@ -8,6 +8,10 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * Controlador para la gestión de inicio de sesión y registro de usuarios
+ * Maneja el registro, inicio de sesión y cierre de sesión de los usuarios
+ */
 class LoginController extends Controller
 {
     public function register(Request $request)
@@ -35,9 +39,12 @@ class LoginController extends Controller
         return redirect(route('logged'));
     }
 
+    /**
+     * Muestra el formulario de inicio de sesión
+     */
     public function login(Request $request)
     {
-        //validar los datos del formulario
+        //validar los datos del formulario necesarios para el inicio de sesión
         $credentials = [
             'email' => $request->email,
             'password' => $request->password,
@@ -55,6 +62,9 @@ class LoginController extends Controller
         }
     }
 
+    /**
+     * Invalida la sesión del usuario y lo redirige al inicio
+     */
     public function logout(Request $request)
     {
         Auth::logout();

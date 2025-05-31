@@ -5,6 +5,10 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Middleware para verificar si el usuario es desarrollador o administrador.
+ * Permite el acceso a rutas específicas solo a usuarios con roles 1 (Administrador) o 2 (Desarrollador).
+ */
 class Developer
 {
     public function handle($request, Closure $next)

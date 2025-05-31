@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.head.appendChild(style);
 });
 
+// Script para filtrar juegos por categoría
 document.addEventListener('DOMContentLoaded', function() {
     const categoryButtons = document.querySelectorAll('.category');
     const gameCards = document.querySelectorAll('.game-card');

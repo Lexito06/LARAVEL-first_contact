@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * Clase User
+ *
+ * Representa a los usuarios del sistema
+ */
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -46,9 +51,13 @@ class User extends Authenticatable
         ];
     }
 
+    /**
+     * Relación con la tabla rol
+     *
+     * Un usuario puede tener un rol
+     */
     public function rol()
     {
         return $this->belongsTo(Rol::class, 'id_rol'); // Asegúrate de que 'id_rol' sea la clave foránea
     }
-
 }

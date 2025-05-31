@@ -10,8 +10,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Controlador para la gestión de juegos
+ * Permite listar, crear, editar, eliminar y mostrar detalles de los juegos
+ */
 class JuegoController extends Controller
 {
+    /**
+     * Muestra la lista de juegos disponibles en la página principal
+     * Si el usuario está autenticado, redirige a la vista 'logged', es decir, la página que ve un usuario logueado
+     */
     public function index()
     {
 
@@ -25,6 +33,10 @@ class JuegoController extends Controller
         return view('juego.index', compact('juegos'));
     }
 
+    /**
+     * Muestra la página principal de juegos para usuarios autenticados
+     * Incluye los juegos que el usuario ha agregado a su biblioteca
+     */
     public function logged()
     {
         $userId = Auth::id();
@@ -43,6 +55,10 @@ class JuegoController extends Controller
         return view('juego.logged', compact('juegos', 'juegosBiblioteca'));
     }
 
+    /**
+     * Muestra el formulario para crear un nuevo juego
+     * Incluye las categorías disponibles para seleccionar
+     */
     public function create()
     {
         // Paso las categorías
@@ -51,6 +67,10 @@ class JuegoController extends Controller
         return view('juego.developer', compact('categorias'));
     }
 
+    /**
+     * Almacena un nuevo juego en la base de datos
+     * Guarda la imagen que se proporciona y agrega el juego a la biblioteca del usuario que lo creó
+     */
     public function store(StoreJuegoRequest $request)
     {
         // Debido a que el desarrollador/admin es el que crea el juego, también se le añadirá a su propia biblioteca propia
@@ -82,6 +102,10 @@ class JuegoController extends Controller
         return redirect()->route('juego.index');
     }
 
+    /**
+     * Muestra los detalles de un juego específico
+     * Incluye si el juego está en la biblioteca del usuario autenticado
+     */
     public function show($id)
     {
         $juego = Juego::findOrFail($id);
@@ -98,11 +122,18 @@ class JuegoController extends Controller
         return view('juego.show', compact('juego', 'enBiblioteca'));
     }
 
+    /**
+     * Muestra el formulario para editar un juego existente
+     */
     public function edit(Juego $juego)
     {
         return view('juego.edit', compact('juego'));
     }
 
+    /**
+     * Actualiza un juego existente en la base de datos
+     * Valida los datos del juego antes de actualizarlo
+     */
     public function update(Request $request, Juego $juego)
     {
 
@@ -116,11 +147,13 @@ class JuegoController extends Controller
 
         $juego->update($request->all());
 
-
-
         return redirect()->route('juego.show', $juego);
     }
 
+    /**
+     * Elimina un juego de la base de datos
+     * Redirige a la tienda después de eliminar el juego
+     */
     public function destroy(Juego $juego)
     {
         $juego->delete();
@@ -128,6 +161,10 @@ class JuegoController extends Controller
         return redirect()->route('juego.tienda');
     }
 
+    /**
+     * Muestra la tienda de juegos
+     * Incluye juegos recientes (subidos hace menos de 1 día), destacados(los que tengan una valoración mayor a 3 estrellas) y todas las categorías
+     */
     public function tienda()
     {
         $juegos = Juego::orderby('id', 'desc')->paginate(10);
@@ -144,6 +181,10 @@ class JuegoController extends Controller
         return view('juego.tienda', compact('juegos', 'juegosRecientes', 'juegosDestacados', 'categorias'));
     }
 
+    /**
+     * Muestra todos los juegos disponibles
+     * Permite paginar los resultados y muestra todas las categorías
+     */
     public function all(Request $request)
     {
         $juegos = Juego::orderby('id', 'desc')->paginate(20);

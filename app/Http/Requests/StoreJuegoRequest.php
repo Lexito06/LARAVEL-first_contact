@@ -4,6 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Request para almacenar un nuevo juego
+ * Valida los datos necesarios para crear un juego en la base de datos
+ */
 class StoreJuegoRequest extends FormRequest
 {
     /**

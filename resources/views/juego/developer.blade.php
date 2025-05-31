@@ -82,25 +82,26 @@
                     <button type="submit" class="submit-btn">Publicar Juego</button>
                 </div>
             </form>
+            <div>
+
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <h2>Errores:</h2>
+                        <ul>
+
+                            @foreach ($errors->all() as $error)
+                                <li>
+                                    {{ $error }}
+                                </li>
+                            @endforeach
+
+                        </ul>
+                    </div>
+                @endif
+
+            </div>
         </div>
-        <div>
 
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <h2>Errores:</h2>
-                    <ul>
-
-                        @foreach ($errors->all() as $error)
-                            <li>
-                                {{ $error }}
-                            </li>
-                        @endforeach
-
-                    </ul>
-                </div>
-            @endif
-
-        </div>
     </div>
 
     <script src="{{ asset('js/developer.js') }}"></script>

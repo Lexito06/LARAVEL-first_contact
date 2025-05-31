@@ -63,6 +63,24 @@
                         <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirmar contraseña">
                     </div>
                 </div>
+                        <div>
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <h2>Errores:</h2>
+                    <ul>
+
+                        @foreach ($errors->all() as $error)
+                            <li>
+                                {{ $error }}
+                            </li>
+                        @endforeach
+
+                    </ul>
+                </div>
+            @endif
+
+        </div>
             </div>
             <div class="center-btn">
                 <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar Cambios</button>

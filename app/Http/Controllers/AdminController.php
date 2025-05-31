@@ -9,8 +9,18 @@ use App\Models\Categoria;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 
+/**
+ * Controlador para la gestión del panel de administración
+ * Maneja las operaciones CRUD del admin para usuarios, juegos, pedidos y categorías
+ */
 class AdminController extends Controller
 {
+
+    /**
+     * Muestra el panel de administración con los datos necesarios
+     * Devolviendo todos los usuarios, juegos, pedidos y categorías,
+     * así como los registros recientes de cada uno
+     */
     public function index()
     {
         $usuarios = User::all();
@@ -37,10 +47,17 @@ class AdminController extends Controller
 
     // Métodos de usuarios
 
+    /**
+     * Muestra el formulario para editar un usuario
+     */
     public function editUsuario(User $usuario)
     {
         return view('admin.usuario-edit', compact('usuario'));
     }
+
+    /**
+     * Modifica un usuario existente y lo guarda en la base de datos
+     */
     public function updateUsuario(Request $request, User $usuario)
     {
         $request->validate([
@@ -59,6 +76,9 @@ class AdminController extends Controller
 
         return redirect()->route('admin');
     }
+    /**
+     * Elimina un usuario de la base de datos
+     */
     public function destroyUsuario(User $usuario)
     {
         $usuario->delete();
@@ -67,6 +87,10 @@ class AdminController extends Controller
     }
 
     // Métodos de pedidos
+
+    /**
+     *Elimina un pedido de la base de datos
+     */
     public function destroyPedido(Pedido $pedido)
     {
         $pedido->delete();
@@ -75,11 +99,17 @@ class AdminController extends Controller
     }
 
     // Métodos de categorías
+    /**
+     * Muestra el formulario para editar una categoría
+     */
     public function editCategoria(Categoria $categoria)
     {
         return view('admin.categoria-edit', compact('categoria'));
     }
 
+    /**
+     * Modifica una categoría existente y la guarda en la base de datos
+     */
     public function updateCategoria(Request $request, Categoria $categoria)
     {
         $request->validate([
@@ -91,6 +121,10 @@ class AdminController extends Controller
         return redirect()->route('admin');
     }
 
+    /**
+     * Elimina una categoría de la base de datos
+     * Reasigna los juegos de la categoría a "Sin categoría" antes de eliminarla
+     */
     public function destroyCategoria(Categoria $categoria)
     {
         // Busca o crea la categoría "Sin categoría"
@@ -110,12 +144,17 @@ class AdminController extends Controller
         return redirect()->route('admin');
     }
 
+    /**
+     * Muestra el formulario para crear una nueva categoría
+     */
     public function createCategoria()
     {
-        // Muestra el formulario para crear una nueva categoría
         return view('admin.categoria-create');
     }
 
+    /**
+     * Guarda una nueva categoría en la base de datos
+     */
     public function storeCategoria(Request $request)
     {
         // Valida y guarda la nueva categoría
@@ -131,12 +170,20 @@ class AdminController extends Controller
     }
 
     // Métodos de juegos
+    /**
+     * Muestra el formulario para crear un nuevo juego
+     */
     public function editJuego(Juego $juego)
     {
         $categorias = Categoria::all();
 
         return view('admin.juego-edit', compact('juego', 'categorias'));
     }
+
+    /**
+     * Modifica un juego existente y lo guarda en la base de datos
+     * Valida los datos del juego antes de actualizarlo
+     */
     public function updateJuego(Request $request, Juego $juego)
     {
 
@@ -153,6 +200,9 @@ class AdminController extends Controller
         return redirect()->route('admin');
     }
 
+    /**
+     * Elimina un juego de la base de datos
+     */
     public function destroyJuego(Juego $juego)
     {
         $juego->delete();

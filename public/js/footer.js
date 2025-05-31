@@ -140,43 +140,6 @@ function adjustStarIntensity() {
 }
 setInterval(adjustStarIntensity, 3600000); // Cada hora
 
-// Estrellas fugaces ocasionales
-function createShootingStar() {
-    const canvas = document.getElementById('starfield');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (Math.random() < 0.001) { // Probabilidad muy baja
-        const shootingStar = {
-            x: Math.random() * canvas.width,
-            y: 0,
-            length: 50,
-            speed: 8,
-            opacity: 1
-        };
-        function animateShootingStar() {
-            ctx.save();
-            ctx.globalAlpha = shootingStar.opacity;
-            ctx.strokeStyle = '#ffffff';
-            ctx.lineWidth = 2;
-            ctx.shadowColor = '#3b82f6';
-            ctx.shadowBlur = 10;
-            ctx.beginPath();
-            ctx.moveTo(shootingStar.x, shootingStar.y);
-            ctx.lineTo(shootingStar.x - shootingStar.length, shootingStar.y + shootingStar.length);
-            ctx.stroke();
-            ctx.restore();
-            shootingStar.x += shootingStar.speed;
-            shootingStar.y += shootingStar.speed;
-            shootingStar.opacity -= 0.02;
-            if (shootingStar.opacity > 0 && shootingStar.y < canvas.height) {
-                requestAnimationFrame(animateShootingStar);
-            }
-        }
-        animateShootingStar();
-    }
-}
-setInterval(createShootingStar, 100);
-
 // Animación de entrada para las tarjetas
 const observerOptions = {
     threshold: 0.1,
